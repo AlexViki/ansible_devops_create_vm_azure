@@ -58,7 +58,7 @@ echo "###########################################################"
 echo "Clone playbook file from GIT"
 echo "###########################################################"
 
-#git clone
+git clone https://github.com/AlexViki/ansible_devops_create_vm_azure_yml_file.git create_vm.yml
 
 echo "###########################################################"
 echo "RUN playbook "
