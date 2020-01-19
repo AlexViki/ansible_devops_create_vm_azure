@@ -9,7 +9,7 @@
 
 ---------------------------------------------------------------------------------------------------
 
-*you need to copy this script to your local sh script and run it from your CLI*
+### you need to copy this script to your local sh script and run it from your CLI
 - script will install all necessary package for running "Ansible" file
 - use Azure service principal for authorization "az ad sp create-for-rbac --name AnsibleService" before running this script
 - create folder "/secret" and thee files "url" "pass" "tenant" and copy to these files results which return "Azure service principal"
