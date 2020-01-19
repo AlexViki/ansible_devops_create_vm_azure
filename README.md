@@ -15,7 +15,7 @@
 - create folder "/secret" and thee files "url" "pass" "tenant" and copy to these files results which return "Azure service principal"
 
 ---------------------------------------------------------------------------------------------------
-
+```
 #!/bin/bash
 URL=`cat ~/secret/url`
 PASS=`cat ~/secret/pass`
@@ -56,5 +56,5 @@ ansible-playbook -i ~/ansible_devops_create_vm_azure/hosts ~/ansible_devops_crea
 echo "###########################################################"
 echo
 echo "-------------END-------------"
-
+```
 ---------------------------------------------------------------------------------------------------
