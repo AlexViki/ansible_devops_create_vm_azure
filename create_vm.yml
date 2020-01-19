@@ -2,13 +2,12 @@
 - name: "Create Azure resources"
   connection: local
   hosts: all
+  
   vars_prompt:
-
     - name: "project_prefix"
       prompt: "Type the name of resources"
       private: no
       default: "test-4"
-
     - name: "admin_username"
       prompt: "Type the admin username"
       private: no
@@ -18,7 +17,7 @@
     - location: "westeurope"
     - vm_size: "Standard_B1s"
     - disk_type: "Standard_LRS"
-    - local_ip: "172.16.0.10"
+#    - local_ip: "172.16.0.10"
     - virtualnetwork_cidr: "172.16.0.0/16"
     - subnet_cidr: "172.16.1.0/24"
     - admin_pub_path: "~/.ssh/id_rsa.pub"
@@ -32,7 +31,7 @@
     - nic_root_name: "{{project_prefix}}-nic"
     
   tasks:
-    - name: "Create {{project_prefix}}-rg Resource Group"
+    - name: "----->Create {{project_prefix}}-rg Resource Group"
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
         location: "{{location}}"
@@ -101,6 +100,7 @@
           - path: "/home/{{admin_username}}/.ssh/authorized_keys"
             key_data: "{{lookup('file', '{{admin_pub_path}}') }}"
         network_interface_names: "{{nic_root_name}}"
+        custom_data: "{{ lookup('file', 'cloud-init.yml') }}"
         image:
           offer: UbuntuServer
           publisher: Canonical
