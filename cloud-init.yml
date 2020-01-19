@@ -23,26 +23,20 @@ write_files:
     path: /etc/nginx/.htpasswd
     content: |
      user01:$apr1$.S4y9MKV$UTT43eHyJsnULFpGmFcq11
+  - owner: root:root
+    path: /etc/apt/sources.list.d/jenkins.list
+    content: |
+     deb https://pkg.jenkins.io/debian-stable binary/
 
 runcmd:
   - sudo mkdir TEST
-  - wget https://github.com/AlexViki/ansible_devops_create_vm_azure/archive/master.zip -P /TEST/
-  - wget https://pkg.jenkins.io/debian-stable/binary/jenkins_2.190.3_all.deb -P /TEST/
-#- sudo apt-get update
-#- sudo apt-get upgrade
-#- sudo apt-get install openjdk-8-jre -y
-#- sudo apt-get install nginx -y
-#- [ wget, -q, -O, -P, /1_test https://pkg.jenkins.io/debian/jenkins-ci.org.key ]
-#| sudo apt-key add -
-#- sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-#- sudo apt-get update
-#- sudo apt-get install jenkins -y
-#- service nginx restart >> /tmp/install.log
-
-#runcmd:
-#    - [ sudo, -Hu, ubuntu, sh, -c, 'grep "cloud-init.*running"  /var/log/cloud-init.log > ~/runcmd.log' ]
-#    - [ sudo, -Hu, ubuntu, sh, -c, 'read up sleep < /proc/uptime; echo $(date): runcmd up at $up | tee -a ~/runcmd.log' ]
-#    - [ sudo, -Hu, ubuntu, sh, -c, *user_setup ]
+  - wget -q -P /tmp/ - https://pkg.jenkins.io/debian/jenkins-ci.org.key
+  - sudo apt-key add /tmp/jenkins-ci.org.key
+  - sudo apt --fix-broken install
+  - sudo apt-get update
+  - sudo apt --fix-broken install
+  - sudo apt-get install jenkins -y
+  - sudo service nginx restart >> /tmp/install.log
 
 #cloud-config
 
