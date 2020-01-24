@@ -2,8 +2,6 @@
 - name: "Create Azure resources"
   connection: local
   hosts: all
-  include_vars:
-    file: ./vars.yml
   
   vars_prompt:
     - name: "project_prefix"
@@ -34,6 +32,8 @@
     
   tasks:
     - name: "----->Create {{project_prefix}}-rg Resource Group"
+      include_vars:
+        file: ./vars.yml
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
         location: "{{location}}"
