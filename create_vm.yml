@@ -31,7 +31,8 @@
 #    - nic_root_name: "{{project_prefix}}-nic"
     
   tasks:
-    include_vars: vars/vars.yml
+    vars_files:
+    - ./vars/vars.yml
     - name: "----->Create {{project_prefix}}-rg Resource Group"
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
