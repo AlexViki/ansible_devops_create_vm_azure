@@ -31,10 +31,10 @@
 #    - nic_root_name: "{{project_prefix}}-nic"
     
   tasks:
-   include_vars:
-    file: ./vars.yml
-    name: vars
-    
+    include_vars:
+      file: ./vars.yml
+      name: vars
+
     - name: "----->Create Resource Group"  
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
