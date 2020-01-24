@@ -32,7 +32,7 @@
     
   tasks:
     include_vars:
-      file: ./vars.yml
+      file: vars/vars.yml
       name: vars
 
     - name: "----->Create Resource Group"  
