@@ -32,7 +32,7 @@
     
   tasks:
     vars_files:
-    - ./vars/vars.yml
+      - ./vars/vars.yml
     - name: "----->Create {{project_prefix}}-rg Resource Group"
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
