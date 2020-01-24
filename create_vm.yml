@@ -33,7 +33,7 @@
   tasks:
     - name: "----->Create {{project_prefix}}-rg Resource Group"
       include_vars:
-        file: ~/ansible_devops_create_vm_azure/vars.yml
+        file: ./vars.yml
         name: vars
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
