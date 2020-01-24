@@ -2,6 +2,8 @@
 - name: "Create Azure resources"
   connection: local
   hosts: all
+  include_vars:
+    file: ./vars.yml
   
   vars_prompt:
     - name: "project_prefix"
@@ -13,22 +15,22 @@
       private: no
       default: "user"
 
-  vars:
-    - location: "westeurope"
-    - vm_size: "Standard_B1s"
-    - disk_type: "Standard_LRS"
+#  vars:
+#    - location: "westeurope"
+#    - vm_size: "Standard_B1s"
+#    - disk_type: "Standard_LRS"
 #    - local_ip: "172.16.0.10"
-    - virtualnetwork_cidr: "172.16.0.0/16"
-    - subnet_cidr: "172.16.1.0/24"
-    - admin_pub_path: "~/.ssh/id_rsa.pub"
-    - resourcegroup_name: "{{project_prefix}}-rg"
-    - availabilityset_name: "{{project_prefix}}-avset"
-    - virtualnetwork_name: "{{project_prefix}}-vnet"
-    - subnet_name: "{{project_prefix}}-subnet"
-    - securitygroup_name: "{{project_prefix}}-nsg"
-    - vm_root_name: "{{project_prefix}}-vm"
-    - public_ip_name: "{{project_prefix}}-ip"
-    - nic_root_name: "{{project_prefix}}-nic"
+#    - virtualnetwork_cidr: "172.16.0.0/16"
+#    - subnet_cidr: "172.16.1.0/24"
+#    - admin_pub_path: "~/.ssh/id_rsa.pub"
+#    - resourcegroup_name: "{{project_prefix}}-rg"
+#    - availabilityset_name: "{{project_prefix}}-avset"
+#    - virtualnetwork_name: "{{project_prefix}}-vnet"
+#    - subnet_name: "{{project_prefix}}-subnet"
+#    - securitygroup_name: "{{project_prefix}}-nsg"
+#    - vm_root_name: "{{project_prefix}}-vm"
+#    - public_ip_name: "{{project_prefix}}-ip"
+#    - nic_root_name: "{{project_prefix}}-nic"
     
   tasks:
     - name: "----->Create {{project_prefix}}-rg Resource Group"
