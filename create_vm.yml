@@ -17,7 +17,7 @@
     - location: "westeurope"
     - vm_size: "Standard_B1s"
     - disk_type: "Standard_LRS"
-    - local_ip: "172.16.0.10"
+#    - local_ip: "172.16.0.10"
     - virtualnetwork_cidr: "172.16.0.0/16"
     - subnet_cidr: "172.16.1.0/24"
     - admin_pub_path: "~/.ssh/id_rsa.pub"
@@ -31,23 +31,19 @@
     - nic_root_name: "{{project_prefix}}-nic"
     
   tasks:
-#    include_vars:
-#       file: vars/vars.yml
-#       name: vars
-
-    - name: "----->Create Resource Group"  
+    - name: "----->Create {{project_prefix}}-rg Resource Group"
       azure_rm_resourcegroup:
         name: "{{resourcegroup_name}}"
         location: "{{location}}"
 
-   - name: "----->Create Virtual Network"
+    - name: "----->Create {{virtualnetwork_name}} Virtual Network"
       azure_rm_virtualnetwork:
         name: "{{virtualnetwork_name}}"
         resource_group: "{{resourcegroup_name}}"
         address_prefixes_cidr:
           - "{{virtualnetwork_cidr}}"
 
-   - name: "----->Create Subnet in for VMs"
+    - name: "----->Create {{subnet_name}} Subnet in {{virtualnetwork_name}} for VMs"
       azure_rm_subnet:
         name: "{{subnet_name}}"
         virtual_network_name: "{{virtualnetwork_name}}"
@@ -55,7 +51,7 @@
         address_prefix_cidr: "{{subnet_cidr}}"
       register: subnet
 
-   - name: "----->Create security rules (if local IP address was given)"
+    - name: "----->Create {{securitygroup_name}} security rules (if local IP address was given)"
       azure_rm_securitygroup:
         name: "{{securitygroup_name}}"
         resource_group: "{{resourcegroup_name}}"
@@ -77,7 +73,7 @@
             direction: Inbound
 #      when: local_ip | ipaddr
 
-   - name: "----->Create a network interface for each VM"
+    - name: "----->Create a {{nic_root_name}}X network interface for each VM"
       azure_rm_networkinterface:
         name: "{{nic_root_name}}"
         resource_group: "{{resourcegroup_name}}"
@@ -90,7 +86,7 @@
             primary: True
 #      with_sequence: count="{{instances_number}}"
 
-   - name: "----->Create VM with existing NIC"
+    - name: "----->Create {{vm_root_name}}X VM with existing NIC"
       azure_rm_virtualmachine:
         resource_group: "{{resourcegroup_name}}"
         name: "{{vm_root_name}}"
